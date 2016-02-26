@@ -227,3 +227,11 @@ define VMC {
 		this.value = 2;
 	}
 }
+
+// Compteur pour l'execution des règles
+define Counter {
+    count: 0,
+    constructor: function(count){
+        this.count = count;
+    }
+}

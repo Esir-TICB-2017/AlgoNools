@@ -17,6 +17,7 @@ var ruleFilePath    = __dirname + '/Main_raisonneur.nools';
 var flow            = nools.compile(ruleFilePath);
 var session         = flow.getSession();
 
+
 // Création d'un chauffage
 var Chauffage       = flow.getDefined('chauffage');
 session.assert(new Chauffage (true, 0));
@@ -53,7 +54,7 @@ session.assert(new CaptCO2(400));
 session.match();
 
 // Modification aléatoire de la consigne
-setInterval(updateConsLum, 10000);
+setInterval(updateConsLum, 1000);
 
 	
 
