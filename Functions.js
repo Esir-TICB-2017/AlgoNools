@@ -15,17 +15,18 @@ function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
+// Fonction de mise à jour de la mesure de la luminosité + affichage
+function updateConsLum() {
+	captLuminositeInt.setValue(getRandomInt(250,750));
+}
 
 // Fonction pour mettre à jour à intervalle régulier, les actionneurs
 function updateActionneur() {
 	updateCapteurTemperature();
 	updateCapteurLuminosite();
-	updateCons();
-	updateCapteurCo2();
 	afficher("Volet = "+volet.getValue());
 	afficher("Lumiere = "+lumiere.getValue());
 	afficher("-----------------------");
-
 }
 
 
@@ -66,14 +67,14 @@ function updateCons() {
 	consigne.setNuit(getRandomInt(0,1000));
 	consigne.setJourSuf(getRandomInt(0,1000));
 	consigne.setTempSuf(getRandomInt(0,30));
-	consigne.setLumSuf(getRandomInt(0,1000));
+	consigne.setLumSuf()(getRandomInt(0,1000));
 	consigne.setCo2(getRandomInt(0,1000));
 	consigne.setLumFort(getRandomInt(0,1000));
 
-	afficher("Consigne = ConsigneLum : " +consigne.getLum()+ "\nConsigneTemp : " +consigne.getTemp() + 
-	"\nConsigneNuit : " + consigne.getNuit()+ "\nConsigneJourSuf : " + consigne.getJourSuf() + 
-	"\nConsigneTempSuf : "+ consigne.getTempSuf() + "\nConsigneLumSuf : " + consigne.getLumSuf() + 
-	"\nConsigneCo2 : " + consigne.getCo2()  + "\nConsigneLumFort : " + consigne.getLumFort());	// lux
+	afficher("Consigne = ConsigneLum : " +consigne.getLum()+ " ConsigneTemp : " +consigne.getTemp() + 
+	" ConsigneNuit : " + consigne.getNuit()+ " ConsigneJourSuf : " + consigne.getJourSuf() + 
+	" ConsigneTempSuf : "+ consigne.getTempSuf() + " ConsigneLumSuf : " + consigne.getLumSuf() + 
+	" ConsigneCo2 : " + consigne.getCo2()  + " ConsigneLumFort : " + consigne.getLumFort());	// lux
 }
 
 function updateCapteurCo2(){

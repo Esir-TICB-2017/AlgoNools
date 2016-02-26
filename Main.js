@@ -45,22 +45,13 @@ session.assert(vmc = new VMC(true, 2));
 var CaptCO2			= flow.getDefined('captCO2');
 session.assert(captCO2 = new CaptCO2(400));
 
-// Fonction pour mettre à jour à intervalle régulier, les actionneurs
-function updateActionneur() {
-	updateCapteurTemperature();
-	updateCapteurLuminosite();
-	updateCons();
-	updateCapteurCo2();
-	afficher("Volet = "+volet.getValue());
-	afficher("Lumiere = "+lumiere.getValue());
-	afficher("-----------------------");
-	session.match();
-}
 
+// Démarrage du raisonneur
+session.match(); 
 
 // Modification aléatoire de la consigne
-setInterval(updateActionneur, 10000);
- 
+setInterval(updateActionneur, 1000);
+setInterval(updateConsLum, 1000);
 
 
 

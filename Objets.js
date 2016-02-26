@@ -35,50 +35,7 @@ define Consigne {
 	},
 	setLum : function(val) {
 		this.lum = val;
-	},
-	getTemp: function() {
-		return this.temp;
-	},
-	setTemp : function(val) {
-		this.temp = val;
-	},
-	getNuit: function() {
-		return this.nuit;
-	},
-	setNuit : function(val) {
-		this.nuit = val;
-	},
-	getJourSuf: function() {
-		return this.jourSuf;
-	},
-	setJourSuf : function(val) {
-		this.jourSuf = val;
-	},
-	getTempSuf: function() {
-		return this.tempSuf;
-	},
-	setTempSuf : function(val) {
-		this.tempSuf = val;
-	},
-	getLumSuf: function() {
-		return this.lumSuf;
-	},
-	setLumSuf : function(val) {
-		this.lumSuf = val;
-	},
-	getCo2: function() {
-		return this.co2;
-	},
-	setCo2 : function(val) {
-		this.co2 = val;
-	},
-	getLumFort: function() {
-		return this.lumFort;
-	},
-	setLumFort : function(val) {
-		this.lumFort = val;
 	}
-
 }
 
 define Chauffage {
