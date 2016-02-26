@@ -24,6 +24,7 @@ rule augLum1 {
 	}
 	then {
 		modify(lum, lum.setUp());
+		afficher("rule augLum1 : lum value = " + lum.getValue());
 	}
 }
 rule augLum2 {
@@ -35,6 +36,7 @@ rule augLum2 {
 	}
 	then {
 		modify(volet, volet.setUp());
+		afficher("rule augLum2 : volet value = " + volet.getValue());
 	}
 }
 rule dimLum1 {
@@ -45,6 +47,7 @@ rule dimLum1 {
 	}
 	then {
 		modify(lum, lum.setDown());
+		afficher("rule dimLum1 : lum value = " + lum.getValue());
 	}
 }
 rule dimLum2 {
@@ -56,6 +59,7 @@ rule dimLum2 {
 	}
 	then {
 		modify(volet, volet.setDown());
+		afficher("rule dimLum2 : volet value = " + volet.getValue());
 	}
 }
 
@@ -76,6 +80,7 @@ rule augChauf1 {
 	}
 	then {
 		modify(volet, volet.setUp());
+		afficher("rule augChauf1 : volet value = " + volet.getValue());
 	}
 }
 rule augChauf2 {
@@ -89,6 +94,7 @@ rule augChauf2 {
 	} 
 	then {
 		modify(chauf, chauf.setUp());
+		afficher("rule augChauf2 : chauf value = " + chauf.getValue());
 	}
 }
 rule augChauf3 {
@@ -99,7 +105,7 @@ rule augChauf3 {
 		chauf   : Chauffage;
 	}
 	then {
-		modify(chauf, chauf.setUp());
+		afficher("rule augChauf3 : chauf value = " + chauf.getValue());
 	}
 }
 rule dimChauf1 {
@@ -110,6 +116,7 @@ rule dimChauf1 {
 	}
 	then {
 		modify(chauf, chauf.setDown());
+		afficher("rule dimChauf1 : chauf value = " + chauf.getValue());
 	}
 }
 
@@ -123,6 +130,7 @@ rule dimChauf2 {
 	}
 	then {
 		modify(volet, volet.setDown());
+		afficher("rule dimChauf2 : volet value = " + volet.getValue());
 	}
 }
 
@@ -140,6 +148,7 @@ rule augVMC {
 	}
 	then {
 		modify(vmc, vmc.setV2());
+		afficher("rule augVMC : vmc value = " + vmc.getValue());
 	}
 }
 rule dimVMC {
@@ -150,5 +159,6 @@ rule dimVMC {
 	}
 	then {
 		modify(vmc, vmc.setV1());
+		afficher("rule dimVMC : vmc value = " + vmc.getValue());
 	}
 }
