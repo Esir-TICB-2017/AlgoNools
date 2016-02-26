@@ -24,7 +24,6 @@ rule augLum1 {
 	}
 	then {
 		modify(lum, lum.setUp());
-		afficher("Lumière = "+lum.getValue());
 	}
 }
 rule augLum2 {
@@ -36,7 +35,6 @@ rule augLum2 {
 	}
 	then {
 		modify(volet, volet.setUp());
-		afficher("Volet = "+volet.getValue());
 	}
 }
 rule dimLum1 {
@@ -47,7 +45,6 @@ rule dimLum1 {
 	}
 	then {
 		modify(lum, lum.setDown());
-		afficher("Lumière = "+lum.getValue());
 	}
 }
 rule dimLum2 {
@@ -59,7 +56,6 @@ rule dimLum2 {
 	}
 	then {
 		modify(volet, volet.setDown());
-		afficher("Volet = "+volet.getValue());
 	}
 }
 
@@ -155,52 +151,4 @@ rule dimVMC {
 	then {
 		modify(vmc, vmc.setV1());
 	}
-}
-
-//	===================================================================
-//	Règles pour l'execution des règles par interval
-//	===================================================================*
-//We reached our goal 
-rule "I can count!" {
-    when {
-        $ctr: Counter $ctr.count == 10000;
-    }
-    then{
-        console.log("Look ma! I counted to " + $ctr.count);
-        halt();
-    }
-}
- 
-//no counter was asserted so create one 
-rule "not count" {
-    when {
-        not($ctr: Counter);
-    }
-    then{
-        console.log("Imma gonna count!");
-        assert(new Counter(1));
-    }
-}
- 
-//A little status update 
-rule "give them an update" {
-    when{
-        $ctr: Counter $ctr.count % 1000 == 0 {count: $count}
-    }
-    then{
-        console.log("Imma countin...");
-        modify($ctr, function(){this.count = $count + 1;});
-    }
-}
- 
-//just counting away 
-rule count {
-    when{
-        $ctr: Counter {count: $count}
-    }
-    then{
-        modify($ctr, function(){
-          this.count = $count + 1;
-        });
-    }
 }

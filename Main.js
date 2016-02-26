@@ -20,41 +20,40 @@ var session         = flow.getSession();
 
 // Création d'un chauffage
 var Chauffage       = flow.getDefined('chauffage');
-session.assert(new Chauffage (true, 0));
+session.assert(chauffage = new Chauffage (true, 0));
 // Création d'une lumière
 var Lumiere         = flow.getDefined('lumiere');
-session.assert(new Lumiere (50));
-// Création d'un capteur de température extérieur
+session.assert(lumiere = new Lumiere (50));
+// Création d'un capteur de température extérieur et intérieur
 var CaptTemperature = flow.getDefined('captTemperature');
-session.assert(new CaptTemperature('exterieur', true, 19));
-// Création d'un capteur de température intérieur
-var CaptTemperature = flow.getDefined('captTemperature');
-session.assert(new CaptTemperature('interieur', true, 21));
-// Création d'un capteur de luminosité extérieur
+session.assert(captTemperatureExt = new CaptTemperature('exterieur', true, 19));
+session.assert(captTemperatureInt = new CaptTemperature('interieur', true, 21));
+// Création d'un capteur de luminosité extérieur et intérieur
 var CaptLuminosite  = flow.getDefined('captLuminosite');
-session.assert(new CaptLuminosite('exterieur', true, 1500));
-// Création d'un capteur de luminosité intérieur
-var CaptLuminosite  = flow.getDefined('captLuminosite');
-session.assert(new CaptLuminosite('interieur', true, 300));
+session.assert(captLuminositeExt = new CaptLuminosite('exterieur', true, 50));
+session.assert(captLuminositeInt = new CaptLuminosite('interieur', true, 800));
 // Création d'un volet
 var Volet           = flow.getDefined('volet');
-session.assert(new Volet(100));
+session.assert(volet = new Volet(100));
 // Création de l'objet de consigne
 var Consigne        = flow.getDefined('consigne');
 session.assert(consigne = new Consigne());
 // Création de l'objet VMC
 var VMC				= flow.getDefined('VMC');
-session.assert(new VMC(true, 2));
+session.assert(vmc = new VMC(true, 2));
 // Création du capteur de CO2
 var CaptCO2			= flow.getDefined('captCO2');
-session.assert(new CaptCO2(400));
+session.assert(captCO2 = new CaptCO2(400));
 
 
 // Démarrage du raisonneur
-session.match();
+session.match(); 
 
 // Modification aléatoire de la consigne
+setInterval(updateActionneur, 1000);
 setInterval(updateConsLum, 1000);
+
+
 
 	
 
