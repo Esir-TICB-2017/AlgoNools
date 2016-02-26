@@ -7,8 +7,9 @@
 //
 //	*******************************************************************
 
-
-
+var fs = require("fs")
+var vm = require('vm')
+vm.runInThisContext(fs.readFileSync(__dirname + "/Functions.js"))
 
 // Correspondance entre nools et ce fichier JS
 var nools           = require ('nools');
@@ -33,13 +34,13 @@ var CaptLuminosite  = flow.getDefined('captLuminosite');
 session.assert(new CaptLuminosite('exterieur', true, 1500));
 // Création d'un capteur de luminosité intérieur
 var CaptLuminosite  = flow.getDefined('captLuminosite');
-session.assert(new CaptLuminosite('interieur', true, 500));
+session.assert(new CaptLuminosite('interieur', true, 300));
 // Création d'un volet
 var Volet           = flow.getDefined('volet');
 session.assert(new Volet(100));
 // Création de l'objet de consigne
 var Consigne        = flow.getDefined('consigne');
-session.assert(new Consigne());
+session.assert(consigne = new Consigne());
 // Création de l'objet VMC
 var VMC				= flow.getDefined('VMC');
 session.assert(new VMC(true, 2));
@@ -49,6 +50,11 @@ session.assert(new CaptCO2(400));
 
 
 // Démarrage du raisonneur
-session.match();	
+session.match();
+
+// Modification aléatoire de la consigne
+setInterval(updateConsLum, 10000);
+
+	
 
 

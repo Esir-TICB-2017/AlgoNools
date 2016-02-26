@@ -28,6 +28,13 @@ define Consigne {
 		this.lumSuf  = 500;		// lux
 		this.co2	 = 300;		// ppm
 		this.lumFort = 1000;	// lux
+	},
+
+	getLum: function() {
+		return this.lum;
+	},
+	setLum : function(val) {
+		this.lum = val;
 	}
 }
 

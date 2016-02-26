@@ -24,6 +24,7 @@ rule augLum1 {
 	}
 	then {
 		modify(lum, lum.setUp());
+		afficher("Lumière = "+lum.getValue());
 	}
 }
 rule augLum2 {
@@ -35,6 +36,7 @@ rule augLum2 {
 	}
 	then {
 		modify(volet, volet.setUp());
+		afficher("Volet = "+volet.getValue());
 	}
 }
 rule dimLum1 {
@@ -45,6 +47,7 @@ rule dimLum1 {
 	}
 	then {
 		modify(lum, lum.setDown());
+		afficher("Lumière = "+lum.getValue());
 	}
 }
 rule dimLum2 {
@@ -56,6 +59,7 @@ rule dimLum2 {
 	}
 	then {
 		modify(volet, volet.setDown());
+		afficher("Volet = "+volet.getValue());
 	}
 }
 
