@@ -28,10 +28,9 @@ function updateActionneurs() {
 
 // Fonction pour mettre à jour à intervalle régulier les capteurs
 function updateCapteurs() {
-	//updateCapteurTemperature();
-	//updateCapteurLuminosite();
-	captLuminositeInt.setValue(getRandomInt(200,200));
-	afficher(captLuminositeInt.getValue());
+	updateCapteurTemperature();
+	updateCapteurLuminosite();
+	updateCapteurCo2();
 }
 
 function getRandomBoolean(){
@@ -43,45 +42,45 @@ function getRandomBoolean(){
 }
 
 function updateCapteurTemperature(){
-	//captTemperatureExt.setValue(getRandomInt(0,40));
-	//captTemperatureExt.setEtat(getRandomBoolean());
-	//captTemperatureInt.setValue(getRandomInt(0,40));
-	//captTemperatureInt.setEtat(getRandomBoolean());
-	//afficher("Etat capteur de température intérieur = "+captTemperatureInt.getEtat());
-	//afficher("Etat capteur de température extérieur = "+captTemperatureExt.getEtat());
-	//afficher("Valeur capteur de température intérieur = "+captTemperatureInt.getValue());
-	//afficher("Valeur capteur de température extérieur = "+captTemperatureExt.getValue());
+	captTemperatureExt.setValue(getRandomInt(0,40));
+	captTemperatureExt.setEtat(getRandomBoolean());
+	captTemperatureInt.setValue(getRandomInt(0,40));
+	captTemperatureInt.setEtat(getRandomBoolean());
+	afficher("Etat capteur de température intérieur = "+captTemperatureInt.getEtat());
+	afficher("Etat capteur de température extérieur = "+captTemperatureExt.getEtat());
+	afficher("Valeur capteur de température intérieur = "+captTemperatureInt.getValue());
+	afficher("Valeur capteur de température extérieur = "+captTemperatureExt.getValue());
 }
 
 function updateCapteurLuminosite(){
-	//captLuminositeExt.setValue(getRandomInt(0,40));
-	//captLuminositeExt.setEtat(getRandomBoolean());
-	captLuminositeInt.setValue(getRandomInt(200,200));
-	//captLuminositeInt.setEtat(getRandomBoolean());
-	//afficher("Etat capteur de luminosité intérieur = "+captLuminositeInt.getEtat());
-	//afficher("Etat capteur de luminosité extérieur = "+captLuminositeExt.getEtat());
-	afficher(captLuminositeInt.getValue());
-	//afficher("Valeur capteur de luminosité extérieur = "+captLuminositeExt.getValue());
+	captLuminositeExt.setValue(getRandomInt(0,2000));
+	captLuminositeExt.setEtat(getRandomBoolean());
+	captLuminositeInt.setValue(getRandomInt(200,800));
+	captLuminositeInt.setEtat(getRandomBoolean());
+	afficher("Etat capteur de luminosité intérieur = "+captLuminositeInt.getEtat());
+	afficher("Etat capteur de luminosité extérieur = "+captLuminositeExt.getEtat());
+	afficher("Valeur du capteur de luminosité : "+captLuminositeInt.getValue());
+	afficher("Valeur capteur de luminosité extérieur = "+captLuminositeExt.getValue());
 }
 
 
 function updateCons() {
-	//consigne.setLum(getRandomInt(0,1000));
-	//consigne.setTemp(getRandomInt(0,30));
-	//consigne.setNuit(getRandomInt(0,1000));
-	//consigne.setJourSuf(getRandomInt(0,1000));
-	//consigne.setTempSuf(getRandomInt(0,30));
-	//consigne.setLumSuf(getRandomInt(0,1000));
-	//consigne.setCo2(getRandomInt(0,1000));
-	//consigne.setLumFort(getRandomInt(0,1000));
+	consigne.setLum(getRandomInt(0,1000));
+	consigne.setTemp(getRandomInt(0,30));
+	consigne.setNuit(getRandomInt(0,1000));
+	consigne.setJourSuf(getRandomInt(0,1000));
+	consigne.setTempSuf(getRandomInt(0,30));
+	consigne.setLumSuf(getRandomInt(0,1000));
+	consigne.setCo2(getRandomInt(0,1000));
+	consigne.setLumFort(getRandomInt(0,1000));
 
-	//afficher("Consigne = ConsigneLum : " +consigne.getLum()+ "\nConsigneTemp : " +consigne.getTemp() + 
-	//"\nConsigneNuit : " + consigne.getNuit()+ " \nConsigneJourSuf : " + consigne.getJourSuf() + 
-	//"\nConsigneTempSuf : "+ consigne.getTempSuf() + " \nConsigneLumSuf : " + consigne.getLumSuf() + 
-	//"\nConsigneCo2 : " + consigne.getCo2()  + "\nConsigneLumFort : " + consigne.getLumFort());
+	afficher("Consigne = ConsigneLum : " +consigne.getLum()+ "\nConsigneTemp : " +consigne.getTemp() + 
+	"\nConsigneNuit : " + consigne.getNuit()+ " \nConsigneJourSuf : " + consigne.getJourSuf() + 
+	"\nConsigneTempSuf : "+ consigne.getTempSuf() + " \nConsigneLumSuf : " + consigne.getLumSuf() + 
+	"\nConsigneCo2 : " + consigne.getCo2()  + "\nConsigneLumFort : " + consigne.getLumFort());
 }
 
 function updateCapteurCo2(){
-	//captCO2.setValue(getRandomInt(0,1000));
-	//afficher("CaptCO2 : " + captCO2.getValue());
+	captCO2.setValue(getRandomInt(0,1000));
+	afficher("CaptCO2 : " + captCO2.getValue());
 }

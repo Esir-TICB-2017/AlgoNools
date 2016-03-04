@@ -18,18 +18,16 @@ import("./Objets.js");
 //	===================================================================
 rule augLum1 {
 	when {
-		//consigne: Consigne;
+		consigne: Consigne;
 		volet   : Volet volet.getValue() == 100;
 		lum     : Lumiere lum.getValue() < 100;
-		capLum  : CaptLuminosite capLum.getPlace() == 'interieur' && capLum.getValue() < 500;
+		capLum  : CaptLuminosite capLum.getPlace() == 'interieur' && capLum.getValue() < (consigne.getLum() - 25);
 	}
 	then {
 		modify(lum, lum.setUp());
-
 	}
 }
 
-/*
 rule augLum2 {
 	when {
 		consigne : Consigne;
@@ -49,7 +47,6 @@ rule dimLum1 {
 	}
 	then {
 		modify(lum, lum.setDown());
-		afficher(lum.getValue());
 	}
 }
 rule dimLum2 {
@@ -157,5 +154,3 @@ rule dimVMC {
 		modify(vmc, vmc.setV1());
 	}
 }
-
-*/

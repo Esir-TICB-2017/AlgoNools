@@ -64,6 +64,22 @@ session.matchUntilHalt()
     );
 
 
+setInterval(function() {
+		updateCapteurs();
+		updateActionneurs();
+
+		session.modify(chauffage);
+		session.modify(lumiere);
+		session.modify(captTemperatureExt);
+		session.modify(captLuminositeInt);
+		session.modify(captTemperatureInt);
+		session.modify(captTemperatureExt);
+		session.modify(volet);
+		session.modify(vmc);
+		session.modify(captCO2);
+	}
+	, 1000);
+
 	
 
 
