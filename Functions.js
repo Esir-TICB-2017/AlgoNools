@@ -6,12 +6,11 @@
 
 
 
-
-
 // Fonction d'affichage'
 function afficher(valeur){
 	console.log(valeur);
 }
+
 
 
 // Fonction pour renvoyer un entier aléatoire
@@ -46,10 +45,12 @@ function updateCapteurTemperature(){
 	captTemperatureExt.setEtat(getRandomBoolean());
 	captTemperatureInt.setValue(getRandomInt(0,40));
 	captTemperatureInt.setEtat(getRandomBoolean());
+	afficher("CAPTEURS DE TEMPERATURE : \n");
 	afficher("Etat capteur de température intérieur = "+captTemperatureInt.getEtat());
 	afficher("Etat capteur de température extérieur = "+captTemperatureExt.getEtat());
 	afficher("Valeur capteur de température intérieur = "+captTemperatureInt.getValue());
 	afficher("Valeur capteur de température extérieur = "+captTemperatureExt.getValue());
+	afficher("\n");
 }
 
 function updateCapteurLuminosite(){
@@ -57,10 +58,12 @@ function updateCapteurLuminosite(){
 	captLuminositeExt.setEtat(getRandomBoolean());
 	captLuminositeInt.setValue(getRandomInt(200,800));
 	captLuminositeInt.setEtat(getRandomBoolean());
+	afficher("CAPTEURS DE LUMINOSITE : \n");
 	afficher("Etat capteur de luminosité intérieur = "+captLuminositeInt.getEtat());
 	afficher("Etat capteur de luminosité extérieur = "+captLuminositeExt.getEtat());
-	afficher("Valeur du capteur de luminosité : "+captLuminositeInt.getValue());
+	afficher("Valeur capteur de luminosite intérieur = " + captLuminositeInt.getValue());
 	afficher("Valeur capteur de luminosité extérieur = "+captLuminositeExt.getValue());
+	afficher("\n");
 }
 
 
