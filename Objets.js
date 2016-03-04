@@ -7,7 +7,12 @@
 //			->	Consignes
 //
 //	*******************************************************************
-
+define Counter {
+    count: 0,
+    constructor: function(count){
+        this.count = count;
+    }
+}
 
 define Consigne {
 	lum    : null,		// consigne luminosité intérieure

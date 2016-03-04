@@ -25,6 +25,7 @@ rule augLum1 {
 	}
 	then {
 		modify(lum, lum.setUp());
+
 	}
 }
 
@@ -48,6 +49,7 @@ rule dimLum1 {
 	}
 	then {
 		modify(lum, lum.setDown());
+		afficher(lum.getValue());
 	}
 }
 rule dimLum2 {
@@ -156,53 +158,4 @@ rule dimVMC {
 	}
 }
 
-*/		//	Callback nodejs 	Asynchrone
-//	===================================================================
-//	Règles pour lancer le raisonneur en continu
-//	===================================================================
-
-/*
-//We reached our goal 
-rule LancerFonctions {
-    when {
-        $ctr: Counter $ctr.count == 20000;
-        update : Update update.getValue() == 1;
-    }
-    then{
-	    modify($ctr, function(){this.count = 1;});
-	    modify(update, update.setUpdate);
-    }
-}
- 
-//no counter was asserted so create one 
-rule "not count" {
-    when {
-        not($ctr: Counter);
-    }
-    then{
-        assert(new Counter(1));
-    }
-}
- 
-//A little status update 
-rule "give them an update" {
-    when{
-        $ctr: Counter $ctr.count % 1000 == 0 {count: $count}
-    }
-    then{
-        modify($ctr, function(){this.count = $count + 1;});
-    }
-}
- 
-//just counting away 
-rule count {
-    when{
-        $ctr: Counter {count: $count}
-    }
-    then{
-        modify($ctr, function(){
-          this.count = $count + 1;
-        });
-    }
-}
 */

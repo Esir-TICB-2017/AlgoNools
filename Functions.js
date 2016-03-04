@@ -13,6 +13,7 @@ function afficher(valeur){
 	console.log(valeur);
 }
 
+
 // Fonction pour renvoyer un entier aléatoire
 function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min)) + min;

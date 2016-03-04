@@ -53,25 +53,15 @@ var CaptCO2			= flow.getDefined('captCO2');
 session.assert(captCO2 = new CaptCO2(400));
 
 
-var Update			= flow.getDefined('update');
-session.assert(update = new Update());
-
-
-session.matchUntilHalt().then(
+// Démarrage du raisonneur
+session.matchUntilHalt()
+    .then(
         function(){
         },
         function(err){
             console.log(err.stack);
         }
     );
-
-setTimeout(updateCapteurs, 3000);
-setTimeout(updateActionneurs, 3000);
-
-
-
-
-
 
 
 	
