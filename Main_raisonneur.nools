@@ -4,11 +4,8 @@
 //
 //	*******************************************************************
 
-
 import("./Functions.js");
 import("./Objets.js");
-
-
 
 
 //	===================================================================
@@ -39,6 +36,7 @@ rule augLum2 {
 		modify(volet, volet.setUp());
 	}
 }
+
 rule dimLum1 {
 	when {
 		consigne: Consigne;
@@ -80,6 +78,7 @@ rule augChauf1 {
 		modify(volet, volet.setUp());
 	}
 }
+
 rule augChauf2 {
 	when {
 		consigne: Consigne;
@@ -93,6 +92,7 @@ rule augChauf2 {
 		modify(chauf, chauf.setUp());
 	}
 }
+
 rule augChauf3 {
 	when {
 		consigne: Consigne;
@@ -104,6 +104,7 @@ rule augChauf3 {
 		modify(chauf, chauf.setUp());
 	}
 }
+
 rule dimChauf1 {
 	when {
 		consigne: Consigne;
@@ -144,6 +145,7 @@ rule augVMC {
 		modify(vmc, vmc.setV2());
 	}
 }
+
 rule dimVMC {
 	when {
 		consigne: Consigne;
