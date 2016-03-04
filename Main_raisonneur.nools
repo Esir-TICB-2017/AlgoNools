@@ -24,6 +24,7 @@ rule augLum1 {
 	}
 	then {
 		modify(lum, lum.setUp());
+
 	}
 }
 rule augLum2 {
@@ -45,6 +46,7 @@ rule dimLum1 {
 	}
 	then {
 		modify(lum, lum.setDown());
+		afficher(lum.getValue());
 	}
 }
 rule dimLum2 {

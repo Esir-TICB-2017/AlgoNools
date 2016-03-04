@@ -23,7 +23,7 @@ var Chauffage       = flow.getDefined('chauffage');
 session.assert(chauffage = new Chauffage (true, 0));
 // Création d'une lumière
 var Lumiere         = flow.getDefined('lumiere');
-session.assert(lumiere = new Lumiere (50));
+session.assert(lumiere = new Lumiere (100));
 // Création d'un capteur de température extérieur et intérieur
 var CaptTemperature = flow.getDefined('captTemperature');
 session.assert(captTemperatureExt = new CaptTemperature('exterieur', true, 19));
@@ -47,11 +47,26 @@ session.assert(captCO2 = new CaptCO2(400));
 
 
 // Démarrage du raisonneur
-session.match(); 
+session.matchUntilHalt()
+    .then(
+        function(){
+        },
+        function(err){
+            console.log(err.stack);
+        }
+    );
 
 // Modification aléatoire de la consigne
-setInterval(updateActionneur, 1000);
-setInterval(updateConsLum, 1000);
+setInterval(updateActionneur, (5000));
+setTimeout(function(){
+	lumiere.value=45;
+	session.modify(lumiere);
+}
+,7000);
+
+
+
+
 
 
 

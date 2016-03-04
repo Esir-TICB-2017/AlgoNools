@@ -1,0 +1,45 @@
+import("./Objets.js");
+ 
+
+rule Icancount {
+    when {
+        $ctr: Counter $ctr.count == 10000;
+    }
+    then{
+        console.log("FINIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII, compteur : " + $ctr.count);
+        halt();
+    }
+}
+
+rule notcount {
+    when {
+        not($ctr: Counter);
+    }
+    then{
+        console.log("Création d'un compteur");
+        assert(new Counter(1));
+    }
+}
+ 
+
+rule givethemanupdate {
+    when{
+        $ctr: Counter $ctr.count % 1000 == 0 {count: $count}
+    }
+    then{
+        console.log("Imma countin...");
+        modify($ctr, function(){this.count = $count + 1;});
+    }
+}
+
+rule count {
+    when{
+        $ctr: Counter {count: $count}
+    }
+    then{
+        modify($ctr, function(){
+          this.count = $count + 1;
+          afficher(this.count);
+        });
+    }
+}
