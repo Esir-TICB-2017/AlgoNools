@@ -14,6 +14,7 @@ function afficher(valeur){
 }
 
 
+
 // Fonction pour renvoyer un entier aléatoire
 function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min)) + min;
@@ -28,10 +29,8 @@ function updateActionneurs() {
 
 // Fonction pour mettre à jour à intervalle régulier les capteurs
 function updateCapteurs() {
-	//updateCapteurTemperature();
-	//updateCapteurLuminosite();
-	captLuminositeInt.setValue(getRandomInt(200,200));
-	afficher(captLuminositeInt.getValue());
+	updateCapteurTemperature();
+	updateCapteurLuminosite();
 }
 
 function getRandomBoolean(){
@@ -43,25 +42,29 @@ function getRandomBoolean(){
 }
 
 function updateCapteurTemperature(){
-	//captTemperatureExt.setValue(getRandomInt(0,40));
-	//captTemperatureExt.setEtat(getRandomBoolean());
-	//captTemperatureInt.setValue(getRandomInt(0,40));
-	//captTemperatureInt.setEtat(getRandomBoolean());
-	//afficher("Etat capteur de température intérieur = "+captTemperatureInt.getEtat());
-	//afficher("Etat capteur de température extérieur = "+captTemperatureExt.getEtat());
-	//afficher("Valeur capteur de température intérieur = "+captTemperatureInt.getValue());
-	//afficher("Valeur capteur de température extérieur = "+captTemperatureExt.getValue());
+	captTemperatureExt.setValue(getRandomInt(0,40));
+	captTemperatureExt.setEtat(getRandomBoolean());
+	captTemperatureInt.setValue(getRandomInt(0,40));
+	captTemperatureInt.setEtat(getRandomBoolean());
+	afficher("CAPTEURS DE TEMPERATURE : \n")
+	afficher("Etat capteur de température intérieur = "+captTemperatureInt.getEtat());
+	afficher("Etat capteur de température extérieur = "+captTemperatureExt.getEtat());
+	afficher("Valeur capteur de température intérieur = "+captTemperatureInt.getValue());
+	afficher("Valeur capteur de température extérieur = "+captTemperatureExt.getValue());
+	afficher("\n");
 }
 
 function updateCapteurLuminosite(){
-	//captLuminositeExt.setValue(getRandomInt(0,40));
-	//captLuminositeExt.setEtat(getRandomBoolean());
+	captLuminositeExt.setValue(getRandomInt(0,40));
+	captLuminositeExt.setEtat(getRandomBoolean());
 	captLuminositeInt.setValue(getRandomInt(200,200));
-	//captLuminositeInt.setEtat(getRandomBoolean());
-	//afficher("Etat capteur de luminosité intérieur = "+captLuminositeInt.getEtat());
-	//afficher("Etat capteur de luminosité extérieur = "+captLuminositeExt.getEtat());
-	afficher(captLuminositeInt.getValue());
-	//afficher("Valeur capteur de luminosité extérieur = "+captLuminositeExt.getValue());
+	captLuminositeInt.setEtat(getRandomBoolean());
+	afficher("CAPTEURS DE LUMINOSITE : \n")
+	afficher("Etat capteur de luminosité intérieur = "+captLuminositeInt.getEtat());
+	afficher("Etat capteur de luminosité extérieur = "+captLuminositeExt.getEtat());
+	afficher("Valeur capteur de luminosite intérieur = " + captLuminositeInt.getValue());
+	afficher("Valeur capteur de luminosité extérieur = "+captLuminositeExt.getValue());
+	afficher("\n");
 }
 
 

@@ -21,15 +21,16 @@ rule augLum1 {
 		//consigne: Consigne;
 		volet   : Volet volet.getValue() == 100;
 		lum     : Lumiere lum.getValue() < 100;
-		capLum  : CaptLuminosite capLum.getPlace() == 'interieur' && capLum.getValue() < 500;
+		capLum  : CaptLuminosite capLum.getPlace() == "interieur" && capLum.getValue() < 500;
 	}
 	then {
 		modify(lum, lum.setUp());
+		afficher(lum.getValue());
 
 	}
 }
 
-/*
+
 rule augLum2 {
 	when {
 		consigne : Consigne;
@@ -158,4 +159,4 @@ rule dimVMC {
 	}
 }
 
-*/
+
