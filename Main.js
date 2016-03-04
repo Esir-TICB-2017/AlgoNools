@@ -7,15 +7,22 @@
 //
 //	*******************************************************************
 
+var EventEmitter = require('events').EventEmitter;
+var event = new EventEmitter();
+
+
+
 var fs = require("fs")
 var vm = require('vm')
 vm.runInThisContext(fs.readFileSync(__dirname + "/Functions.js"))
+
 
 // Correspondance entre nools et ce fichier JS
 var nools           = require ('nools');
 var ruleFilePath    = __dirname + '/Main_raisonneur.nools';
 var flow            = nools.compile(ruleFilePath);
 var session         = flow.getSession();
+
 
 
 // Création d'un chauffage
@@ -31,7 +38,7 @@ session.assert(captTemperatureInt = new CaptTemperature('interieur', true, 21));
 // Création d'un capteur de luminosité extérieur et intérieur
 var CaptLuminosite  = flow.getDefined('captLuminosite');
 session.assert(captLuminositeExt = new CaptLuminosite('exterieur', true, 50));
-session.assert(captLuminositeInt = new CaptLuminosite('interieur', true, 800));
+session.assert(captLuminositeInt = new CaptLuminosite('interieur', true, 500));
 // Création d'un volet
 var Volet           = flow.getDefined('volet');
 session.assert(volet = new Volet(100));
@@ -46,12 +53,24 @@ var CaptCO2			= flow.getDefined('captCO2');
 session.assert(captCO2 = new CaptCO2(400));
 
 
-// Démarrage du raisonneur
-session.match(); 
+var Update			= flow.getDefined('update');
+session.assert(update = new Update());
 
-// Modification aléatoire de la consigne
-setInterval(updateActionneur, 1000);
-setInterval(updateConsLum, 1000);
+
+session.matchUntilHalt().then(
+        function(){
+        },
+        function(err){
+            console.log(err.stack);
+        }
+    );
+
+setTimeout(updateCapteurs, 3000);
+setTimeout(updateActionneurs, 3000);
+
+
+
+
 
 
 
