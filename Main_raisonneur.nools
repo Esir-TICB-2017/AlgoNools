@@ -4,11 +4,8 @@
 //
 //	*******************************************************************
 
-
 import("./Functions.js");
 import("./Objets.js");
-
-
 
 
 //	===================================================================
@@ -18,18 +15,15 @@ import("./Objets.js");
 //	===================================================================
 rule augLum1 {
 	when {
-		//consigne: Consigne;
+		consigne: Consigne;
 		volet   : Volet volet.getValue() == 100;
 		lum     : Lumiere lum.getValue() < 100;
-		capLum  : CaptLuminosite capLum.getPlace() == "interieur" && capLum.getValue() < 500;
+		capLum  : CaptLuminosite capLum.getPlace() == 'interieur' && capLum.getValue() < (consigne.getLum() - 25);
 	}
 	then {
 		modify(lum, lum.setUp());
-		
-
 	}
 }
-
 
 rule augLum2 {
 	when {
@@ -42,6 +36,7 @@ rule augLum2 {
 		modify(volet, volet.setUp());
 	}
 }
+
 rule dimLum1 {
 	when {
 		consigne: Consigne;
@@ -50,7 +45,6 @@ rule dimLum1 {
 	}
 	then {
 		modify(lum, lum.setDown());
-		afficher(lum.getValue());
 	}
 }
 rule dimLum2 {
@@ -84,6 +78,7 @@ rule augChauf1 {
 		modify(volet, volet.setUp());
 	}
 }
+
 rule augChauf2 {
 	when {
 		consigne: Consigne;
@@ -97,6 +92,7 @@ rule augChauf2 {
 		modify(chauf, chauf.setUp());
 	}
 }
+
 rule augChauf3 {
 	when {
 		consigne: Consigne;
@@ -108,6 +104,7 @@ rule augChauf3 {
 		modify(chauf, chauf.setUp());
 	}
 }
+
 rule dimChauf1 {
 	when {
 		consigne: Consigne;
@@ -148,6 +145,7 @@ rule augVMC {
 		modify(vmc, vmc.setV2());
 	}
 }
+
 rule dimVMC {
 	when {
 		consigne: Consigne;
@@ -158,5 +156,3 @@ rule dimVMC {
 		modify(vmc, vmc.setV1());
 	}
 }
-
-

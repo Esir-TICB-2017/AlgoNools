@@ -7,12 +7,6 @@
 //			->	Consignes
 //
 //	*******************************************************************
-define Counter {
-    count: 0,
-    constructor: function(count){
-        this.count = count;
-    }
-}
 
 define Consigne {
 	lum    : null,		// consigne luminosité intérieure
@@ -83,7 +77,6 @@ define Consigne {
 	setLumFort : function(val) {
 		this.lumFort = val;
 	}
-
 }
 
 define Chauffage {
@@ -274,27 +267,4 @@ define VMC {
 	setV2 : function() {
 		this.value = 2;
 	}
-}
-
-// Compteur pour l'execution des règles
-define Counter {
-    count: 0,
-    constructor: function(count){
-        this.count = count;
-    },
-}
-
-
-// Objet update
-define Update {
-	etat: 1,
-    constructor: function(){
-    },
-    setUpdate : function() {
-    	updateCapteurs();
-    	updateActionneurs();
-    },
-    getValue : function() {
-    	return this.etat;
-    }
 }
