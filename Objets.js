@@ -4,267 +4,279 @@
 //			->	Chauffage, Lumière, Volet
 //			->	Capteurs (température, luminosité)
 //			->	Capteur de CO2
-//			->	Consignes
+//			->	Consigne
+//			-> 	Moment (matin, jour, soir, nuit)
 //
 //	*******************************************************************
 
 define Consigne {
-	lum    : null,		// consigne luminosité intérieure
-	temp   : null,		// consigne température intérieure
-	nuit   : null,		// consigne luminosité max lorsque c'est la nuit
-	jourSuf: null,		// consigne luminosité min à l'extérieur pour avoir un apport dans la maison
-	tempSuf: null,		// température suffisante pour chauffer la maison avec l'éclairage extérieur 
-	lumSuf : null,		// Luminosité minimale à l 'extérieur pour chauffer le bâtiment
-	co2	   : null,		// Consigne de CO2 maximale
-	lumFort: null,		// Luminosité trop forte, qui chauffe la maison
+	valueSDB     = null,
+	valueSalle   = null,
+	valueChambre = null,
+	mesure       = null,
+	tempSuf      = 22,
+	lumSuf       = 500,
+	tempFort     = 25,
+	lumFort      = 1000,
+	jourSuf      = 100,
 
-	constructor : function() {
-		this.lum     = 500;		// lux
-		this.temp    = 19;		// °C
-		this.nuit    = 100;		// lux
-		this.jourSuf = 300;		// lux
-		this.tempSuf = 15;		// °C
-		this.lumSuf  = 500;		// lux
-		this.co2	 = 300;		// ppm
-		this.lumFort = 1000;	// lux
+	constructor : function(val1, val2, val3, mesure){
+		this.valueSdb     = val1;
+		this.valueSalle   = val2;
+		this.valueChambre = val3;
+		this.mesure       = mesure;
 	},
 
-	getLum: function() {
-		return this.lum;
+	getValue : function(piece){
+		switch(piece){
+			case 'sdb':
+				this.valueSdb = val;
+				break;
+			case 'salle':
+				this.valueSalle = val;
+				break;
+			case 'chambre':
+				this.valueChambre = val;
+				break;
+		}
 	},
-	setLum : function(val) {
-		this.lum = val;
+
+	setValue : function(piece, val){
+		switch(piece){
+			case 'sdb':
+				this.valueSdb = val;
+				break;
+			case 'salle':
+				this.valueSalle = val;
+				break;
+			case 'chambre':
+				this.valueChambre = val;
+				break;
+		}
 	},
-	getTemp: function() {
-		return this.temp;
+
+	getMesure : function(){
+		return this.mesure;
 	},
-	setTemp : function(val) {
-		this.temp = val;
-	},
-	getNuit: function() {
-		return this.nuit;
-	},
-	setNuit : function(val) {
-		this.nuit = val;
-	},
-	getJourSuf: function() {
-		return this.jourSuf;
-	},
-	setJourSuf : function(val) {
-		this.jourSuf = val;
-	},
-	getTempSuf: function() {
-		return this.tempSuf;
-	},
-	setTempSuf : function(val) {
-		this.tempSuf = val;
-	},
-	getLumSuf: function() {
+
+	getValueLumSuf : function(){
 		return this.lumSuf;
 	},
-	setLumSuf : function(val) {
-		this.lumSuf = val;
+
+	getValueTempSuf : function(){
+		return this.tempSuf;
 	},
-	getCo2: function() {
-		return this.co2;
-	},
-	setCo2 : function(val) {
-		this.co2 = val;
-	},
-	getLumFort: function() {
+
+	getValueLumFort : function(){
 		return this.lumFort;
 	},
-	setLumFort : function(val) {
-		this.lumFort = val;
+
+	getValueTempFort : function(){
+		return this.tempFort;
+	},
+
+	getValueJourSuf : function(){
+		return this.jourSuf;
 	}
 }
 
 define Chauffage {
-	etat : null,
-	value: null,
+	value : null,
+	id    : null,
+	place : null,
+	etat  : null,
  	
- 	constructor : function(etat, valeur) {
-			this.etat  = etat;
-			this.value = valeur;
+ 	constructor : function(value, id, place){
+			this.id    = id
+			this.value = value;
+			this.place = place;
+			this.etat  = 'on';
  	},
 
- 	getEtat: function() {
- 		return this.etat;
+ 	getId : function(){
+ 		return this.id;
  	},
- 	getValue: function() {
+ 	getValue : function(){
  		return this.value;
  	},
- 	setEtat: function(etat) {
- 		this.etat = etat;
+ 	getPlace : function(){
+ 		return this.place;
  	},
- 	setValue: function(value) {
- 		this.value = value;
- 	},
- 	setUp : function() {
-		if(this.value!=100){
-			this.value += 1;
-		}
+ 	up : function(){
+		this.value += 1;
 	},
-	setDown : function() {
-		if(this.value!=0){
-			this.value -= 1;
-		}
+	down : function(){
+		this.value -= 1;
+	},
+	getEtat : function(){
+		return this.etat;
+	},
+	setEtat : function(etat){
+		this.etat = etat;
 	}
 }
 
 define Lumiere {
 	value : null,
+	id    : null,
+	place : null,
 
-	constructor : function(value) {
-		if(value >= 100) {this.value = 100;}
-		else if(value <= 0) {this.value = 0;}
-		else {this.value = value;}
+	constructor : function(value, id, place){
+		this.value = value;
+		this.id    = id;
+		this.place = place;
 	},
 	
-	getValue : function() {
+	getValue : function(){
 		return this.value;
 	},
-	setValue : function(value) {
-		if(value >= 100) {this.value = 100;}
-		else if(value <= 0) {this.value = 0;}
-		else {this.value = value;} 
+
+	getId : function(value){
+		return this.id;
 	},
-	setUp : function() {
-		if(this.value!=100){
-			this.value += 1;
-		}
+
+	getPlace : function(){
+		return this.place;
 	},
-	setDown : function() {
-		if(this.value!=0){
-			this.value -= 1;
-		}
+
+	up : function(){
+		this.value = 'up';
+		// api.up(this.id)
+	},
+
+	down : function(){
+		this.value = 'down';
+		// api.down(this.id)
 	}
 }
 
 define CaptTemperature {
-	place: null,
-	etat : null,
-	value: null,
+	place : null,
+	value : null,
 
-	constructor : function(place, etat, value) {
+	constructor : function(value, place){
 		this.place = place;
-		this.etat  = etat;
 		this.value = value;
 	},
 
-	getPlace : function() {
+	getPlace : function(){
 		return this.place;
 	},
-	getEtat : function() {
-		return this.etat;
-	},
-	getValue : function() {
+
+	getValue : function(){
 		return this.value;
 	},
-	setPlace : function(place) {
-		this.place = place;
-	},
-	setEtat : function(etat) {
-		this.etat = etat;
-	}, 
-	setValue : function(value) {
+
+	setValue : function(value){
 		this.value = value;
 	}
 }
 
 define CaptLuminosite {
-	place: null,
-	etat : null,
-	value: null,
+	place : null,
+	value : null,
 
-	constructor : function(place, etat, value) {
+	constructor : function(value, place){
 		this.place = place;
-		this.etat  = etat;
 		this.value = value;
 	},
 
-	getPlace : function() {
+	getPlace : function(){
 		return this.place;
 	},
-	getEtat : function() {
-		return this.etat;
-	},
-	getValue : function() {
+
+	getValue : function(){
 		return this.value;
 	},
-	setPlace : function(place) {
-		this.place = place;
-	},
-	setEtat : function(etat) {
-		this.etat = etat;
-	}, 
-	setValue : function(value) {
+
+	setValue : function(value){
 		this.value = value;
 	}
 }
 
 define Volet {
 	value : null,
+	id    : null,
+	place : null,
 
-	constructor : function(value) {
-		if(value>=100){this.value=100;}
-		else if(value<=0){this.value=0;}
-		else {this.value = value;}
+	constructor : function(value, id, place){
+		this.value = value;
+		this.id    = id;
+		this.place = place;
 	},
 
-	getValue : function() {
+	getValue : function(){
 		return this.value;
 	},
-	setValue : function(value) {
-		if(value>=100){this.value=100;}
-		else if(value<=0){this.value=0;}
-		else {this.value = value;}
+
+	getId : function(){
+		return this.id;
 	},
-	setUp : function() {
-		if(this.value!=100){
-			this.value += 1;
-		}
+
+	getPlace : function(){
+		return this.place;
+	}
+
+	up : function(){
+		this.value = 'up';
+		// api.up(this.id)
 	},
-	setDown : function() {
-		if(this.value!=0){
-			this.value -= 1;
-		}
+
+	down : function(){
+		this.value = 'down';
+		// api.down(this.id)
 	}
 }
 
 define CaptCO2 {
 	value : null,
 
-	constructor : function(value) {
+	constructor : function(value){
 		this.value = value;
 	},
 
-	getValue : function() {
+	getValue : function(){
 		return this.value;
 	},
-	setValue : function(value) {
+
+	setValue : function(value){
 		this.value = value;
 	}
 }
 
 define VMC {
-	etat : null,
 	value: null,
 
-	constructor : function(etat, value) {
-		this.etat = etat;
+	constructor : function(value){
 		this.value = value;
 	},
-	getEtat : function() {
-		return this.etat;
-	},
-	getValue : function() {
-		return this.value;
-	},
-	setV1 : function() {
+
+	setV1 : function(){
 		this.value = 1;
 	}, 
-	setV2 : function() {
+
+	setV2 : function(){
 		this.value = 2;
+	},
+
+	getValue : function(){
+		return this.value;
+	}
+}
+
+define Moment {
+	// Peut prendre seulement : matin, jour, soir, nuit
+	value: null,
+
+	constructor : function(value){
+		this.value = value;
+	},
+
+	setValue : function(value){
+		this.value = value;
+	},
+
+	getValue : function(){
+		return this.value;
 	}
 }
