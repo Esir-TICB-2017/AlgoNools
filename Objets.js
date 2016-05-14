@@ -9,16 +9,32 @@
 //
 //	*******************************************************************
 
+define Moment {
+	value : null,
+
+	constructor : function(value){
+		this.value = value;
+	},
+
+	setValue : function(value){
+		this.value = value;
+	}, 
+
+	getValue : function(){
+		return this.value;
+	}
+}
+
 define Consigne {
-	valueSDB     = null,
-	valueSalle   = null,
-	valueChambre = null,
-	mesure       = null,
-	tempSuf      = 22,
-	lumSuf       = 500,
-	tempFort     = 25,
-	lumFort      = 1000,
-	jourSuf      = 100,
+	valueSdb     : null,
+	valueSalle   : null,
+	valueChambre : null,
+	mesure       : null,
+	tempSuf      : 22,
+	lumSuf       : 500,
+	tempFort     : 25,
+	lumFort      : 1000,
+	jourSuf      : 100,
 
 	constructor : function(val1, val2, val3, mesure){
 		this.valueSdb     = val1;
@@ -30,29 +46,22 @@ define Consigne {
 	getValue : function(piece){
 		switch(piece){
 			case 'sdb':
-				this.valueSdb = val;
+				return this.valueSdb;
 				break;
 			case 'salle':
-				this.valueSalle = val;
+				return this.valueSalle;
 				break;
 			case 'chambre':
-				this.valueChambre = val;
+				return this.valueChambre;
 				break;
 		}
 	},
 
-	setValue : function(piece, val){
-		switch(piece){
-			case 'sdb':
-				this.valueSdb = val;
-				break;
-			case 'salle':
-				this.valueSalle = val;
-				break;
-			case 'chambre':
-				this.valueChambre = val;
-				break;
-		}
+	setValue : function(val){
+		this.valueSdb = val;
+		this.valueSalle = val;
+		this.valueChambre = val;
+
 	},
 
 	getMesure : function(){
@@ -87,10 +96,10 @@ define Chauffage {
 	etat  : null,
  	
  	constructor : function(value, id, place){
-			this.id    = id
-			this.value = value;
-			this.place = place;
-			this.etat  = 'on';
+		this.id    = id;
+		this.value = value;
+		this.place = place;
+		this.etat  = 'on';
  	},
 
  	getId : function(){
@@ -116,63 +125,7 @@ define Chauffage {
 	}
 }
 
-define Lumiere {
-	value : null,
-	id    : null,
-	place : null,
-
-	constructor : function(value, id, place){
-		this.value = value;
-		this.id    = id;
-		this.place = place;
-	},
-	
-	getValue : function(){
-		return this.value;
-	},
-
-	getId : function(value){
-		return this.id;
-	},
-
-	getPlace : function(){
-		return this.place;
-	},
-
-	up : function(){
-		this.value = 'up';
-		// api.up(this.id)
-	},
-
-	down : function(){
-		this.value = 'down';
-		// api.down(this.id)
-	}
-}
-
 define CaptTemperature {
-	place : null,
-	value : null,
-
-	constructor : function(value, place){
-		this.place = place;
-		this.value = value;
-	},
-
-	getPlace : function(){
-		return this.place;
-	},
-
-	getValue : function(){
-		return this.value;
-	},
-
-	setValue : function(value){
-		this.value = value;
-	}
-}
-
-define CaptLuminosite {
 	place : null,
 	value : null,
 
@@ -215,7 +168,64 @@ define Volet {
 
 	getPlace : function(){
 		return this.place;
+	},
+
+	up : function(){
+		this.value = 'up';
+		// api.up(this.id)
+	},
+
+	down : function(){
+		this.value = 'down';
+		// api.down(this.id)
 	}
+}
+
+
+define CaptLuminosite {
+	place : null,
+	value : null,
+
+	constructor : function(value, place){
+		this.place = place;
+		this.value = value;
+	},
+
+	getPlace : function(){
+		return this.place;
+	},
+
+	getValue : function(){
+		return this.value;
+	},
+
+	setValue : function(value){
+		this.value = value;
+	}
+}
+
+define Lumiere {
+	value : null,
+	id    : null,
+	place : null,
+
+	constructor : function(value, id, place){
+		this.value = value;
+		this.id    = id;
+		this.place = place;
+	},
+	
+	getValue : function(){
+		return this.value;
+	},
+
+	getId : function(){
+		return this.id;
+	},
+
+	getPlace : function(){
+		return this.place;
+	},
 
 	up : function(){
 		this.value = 'up';
@@ -244,8 +254,9 @@ define CaptCO2 {
 	}
 }
 
+
 define VMC {
-	value: null,
+	value : null,
 
 	constructor : function(value){
 		this.value = value;
@@ -264,19 +275,3 @@ define VMC {
 	}
 }
 
-define Moment {
-	// Peut prendre seulement : matin, jour, soir, nuit
-	value: null,
-
-	constructor : function(value){
-		this.value = value;
-	},
-
-	setValue : function(value){
-		this.value = value;
-	},
-
-	getValue : function(){
-		return this.value;
-	}
-}

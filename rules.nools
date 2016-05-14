@@ -5,7 +5,6 @@
 import("./Functions.js");
 import("./Objets.js");
 
-
 // 		============================================================
 //		Règles pour gérer le changement de moment de la journée
 //		1ère règle pour que ce soit bien pris en compte pour la suite
@@ -21,8 +20,8 @@ rule matin {
 		consigneLum  : Consigne consigneLum.getMesure() == 'luminosite';
 	}
 	then {
-		modify(consigneTemp, function(){this.valueSdb += 2;});
-		modify(consigneLum, function(){this.valueSdb -= 150;});
+		modify(consigneTemp, function(){consigneTemp.valueSdb = consigne_temperature + 2;});
+		modify(consigneLum, function(){consigneLum.valueChambre = consigne_temperature -150;});
 	}
 }
 
@@ -32,9 +31,9 @@ rule jour {
 		consigneTemp : Consigne consigneTemp.getMesure() == 'temperature';
 	}
 	then {
-		modify(consigneTemp, function(){this.valueSdb -= 2;});
-		modify(consigneTemp, function(){this.valueSalle -= 1;});
-		modify(consigneTemp, function(){this.valueChambre -= 2;});
+		modify(consigneTemp, function(){consigneTemp.valueSdb = consigne_temperature - 2;});
+		modify(consigneTemp, function(){consigneTemp.valueSalle = consigne_temperature - 1;});
+		modify(consigneTemp, function(){consigneTemp.valueChambre = consigne_temperature - 2;});
 	}
 }
 
@@ -45,10 +44,10 @@ rule soir {
 		consigneLum  : Consigne consigneLum.getMesure() == 'luminosite';
 	}
 	then {
-		modify(consigneTemp, function(){this.valueSdb += 1;});
-		modify(consigneTemp, function(){this.valueSalle += 1;});
-		modify(consigneTemp, function(){this.valueChambre -= 1;});
-		modify(consigneLum, function(){this.valueChambre -= 150;});
+		modify(consigneTemp, function(){consigneTemp.valueSdb = consigne_temperature + 1;});
+		modify(consigneTemp, function(){consigneTemp.valueSalle = consigne_temperature + 1;});
+		modify(consigneTemp, function(){consigneTemp.valueChambre = consigne_temperature - 1;});
+		modify(consigneLum, function(){consigneLum.valueChambre = consigne_luminosite - 150;});
 	}
 }
 
@@ -59,11 +58,11 @@ rule nuit {
 		consigneLum  : Consigne consigneLum.getMesure() == 'luminosite';
 	}
 	then {
-		modify(consigneTemp, function(){this.valueSdb -= 2;});
-		modify(consigneTemp, function(){this.valueSalle -= 2;});
-		modify(consigneLum, function(){this.valueSalle -= 150;});
-		modify(consigneTemp, function(){this.valueChambre -= 1;});
-		modify(consigneLum, function(){this.valueChambre -= 150;});
+		modify(consigneTemp, function(){consigneTemp.valueSdb = consigne_temperature - 2;});
+		modify(consigneTemp, function(){consigneTemp.valueSalle = consigne_temperature - 2;});
+		modify(consigneLum, function(){consigneLum.valueSalle = consigne_luminosite - 150;});
+		modify(consigneTemp, function(){consigneTemp.valueChambre = consigne_temperature - 1;});
+		modify(consigneLum, function(){consigneLum.valueChambre = consigne_luminosite - 150;});
 	}
 }
 
@@ -138,7 +137,7 @@ rule ChambreChauffageUp2 {
 rule ChambreChauffageUp3 {
 	when {
 		consigne    : Consigne consigne.getMesure() == 'temperature';
-		volet       : Volet volet.getPlace() == 'chambre' volet.getValue() == 'up';
+		volet       : Volet volet.getPlace() == 'chambre' && volet.getValue() == 'up';
 		chauffage   : Chauffage chauffage.getPlace() == 'chambre';
 		temperature : CaptTemperature temperature.getPlace() == 'chambre' 			&& temperature.getValue() < (consigne.getValue('chambre') - 1);
 	}
@@ -201,7 +200,7 @@ rule ChambreLuminositeUp2 {
 rule ChambreLuminositeDown {
 	when {
 		consigne   : Consigne consigne.getMesure() == 'luminosite';
-		luminosite : CaptLuminosite luminosite.getPlace() == 'chambre' 	&& luminosite.getValue() > (consigne.getLum('chambre') + 25);
+		luminosite : CaptLuminosite luminosite.getPlace() == 'chambre' 	&& luminosite.getValue() > (consigne.getValue('chambre') + 25);
 		lumiere    : Lumiere lumiere.getPlace() == 'chambre' 			&& lumiere.getValue() == 'on';
 		}
 	then {
@@ -250,7 +249,7 @@ rule SalleChauffageUp2 {
 rule SalleChauffageUp3 {
 	when {
 		consigne    : Consigne consigne.getMesure() == 'temperature';
-		volet       : Volet volet.getPlace() == 'salle' volet.getValue() == 'up';
+		volet       : Volet volet.getPlace() == 'salle' && volet.getValue() == 'up';
 		chauffage   : Chauffage chauffage.getPlace() == 'salle';
 		temperature : CaptTemperature temperature.getPlace() == 'salle' 			&& temperature.getValue() < (consigne.getValue('salle') - 1);	
 	}
@@ -314,7 +313,7 @@ rule SalleLuminositeUp2 {
 rule SalleLuminositeDown {
 	when {
 		consigne   : Consigne consigne.getMesure() == 'luminosite';
-		luminosite : CaptLuminosite luminosite.getPlace() == 'salle' 	&& luminosite.getValue() > (consigne.getLum('salle') + 25);
+		luminosite : CaptLuminosite luminosite.getPlace() == 'salle' 	&& luminosite.getValue() > (consigne.getValue('salle') + 25);
 		lumiere    : Lumiere lumiere.getPlace() == 'salle' 				&& lumiere.getValue() == 'on';
 		}
 	then {
@@ -346,4 +345,17 @@ rule SalleDimVMC {
 	}
 }
 
-
+// 		============================================================
+//		Règles divers
+//			-> Fermeture des volets quand il fait nuit
+//		============================================================
+rule VoletNuitDown {
+	when {
+		luminosite : CaptLuminosite luminosite.getPlace() == 'exterieur';
+		consigne   : Consigne consigne.getMesure() == 'luminosite' 			&& (luminosite.getValue() < consigne.getValueJourSuf());
+		volet      : Volet;
+	}
+	then {
+		modify(volet, volet.down());
+	}
+}
