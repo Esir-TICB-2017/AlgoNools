@@ -16,53 +16,6 @@ global.retour = "";
 
 
 
-react = function(obj){
-
-		consigneTemp.setValue(obj.consigneTemp);
-		consigneLum.setValue(obj.consigneLum);
-		consigneCo2.setValue(obj.consigneCo2);
-
-		captTemperatureExt.setValue(obj.captTemperatureExt);
-		captTemperatureIntSalle.setValue(obj.captTemperatureIntSalle);
-		captTemperatureIntChambre.setValue(obj.captTemperatureIntChambre);
-		captTemperatureIntSdb.setValue(obj.captTemperatureIntSdb);
-
-		captLuminositeIntSalle.setValue(obj.captLuminositeIntSalle);
-		captLuminositeIntChambre.setValue(obj.captLuminositeIntChambre);
-		captLuminositeExt.setValue(obj.captLuminositeExt);
-
-		captCO2.setValue(obj.captCO2);
-
-		moment.setValue(obj.moment);
-
-		session.modify(consigneTemp);
-		session.modify(consigneLum);
-		session.modify(consigneCo2);
-		session.modify(captTemperatureExt);
-		session.modify(captTemperatureIntSalle);
-		session.modify(captTemperatureIntChambre);
-		session.modify(captTemperatureIntSdb);
-		session.modify(captLuminositeIntSalle);
-		session.modify(captLuminositeIntChambre);
-		session.modify(captLuminositeExt);
-		session.modify(captCO2);
-		session.modify(moment);
-
-	/*	function retour(){
-			return "{'chauffageSdb':"+chauffageSdb.getValue()+", 'chauffageChambre':"+chauffageChambre.getValue()+", 'chauffageSalle':"+chauffageSalle.getValue()+", 'lumiereChambre':"+lumiereChambre.getValue()+", 'lumiereSalle':"+lumiereSalle.getValue()+", 'voletSalle':"+"voletSalle.getValue()"+", 'voletChambre':"+"voletChambre.getValue()"+", 'vmc':"+vmc.getValue()+"}";
-		}
-
-		setTimeout(retour, 1000);*/
-		var promise=new Promise(function(resolve,reject){
-			window.setTimeout(function(){
-				resolve("{'chauffageSdb':"+chauffageSdb.getValue()+", 'chauffageChambre':"+chauffageChambre.getValue()+", 'chauffageSalle':"+chauffageSalle.getValue()+", 'lumiereChambre':"+lumiereChambre.getValue()+", 'lumiereSalle':"+lumiereSalle.getValue()+", 'voletSalle':"+"voletSalle.getValue()"+", 'voletChambre':"+"voletChambre.getValue()"+", 'vmc':"+vmc.getValue()+"}");
-			},3000);
-		});
-	}
-
-
-
-
 
 // Correspondance entre nools et ce fichier JS
 var nools           = require ('nools');
@@ -84,58 +37,47 @@ var session         = flow.getSession();
  */
 
  /* ==> Changer les id des objets <== */
-var Chauffage                         = flow.getDefined('chauffage');
-session.assert(chauffageSdb           = new Chauffage (consigne_temperature, 'id', 'sdb'));
-session.assert(chauffageSalle         = new Chauffage (consigne_temperature, 'id', 'salle'));
-session.assert(chauffageChambre       = new Chauffage (consigne_temperature, 'id', 'chambre'));
+var Chauffage                            = flow.getDefined('chauffage');
+session.assert(chauffageSdb              = new Chauffage (consigne_temperature, 'id', 'sdb'));
+session.assert(chauffageSalle            = new Chauffage (consigne_temperature, 'id', 'salle'));
+session.assert(chauffageChambre          = new Chauffage (consigne_temperature, 'id', 'chambre'));
 
-var Lumiere                           = flow.getDefined('lumiere');
-session.assert(lumiereSalle           = new Lumiere ('down', 'id', 'salle'));
-session.assert(lumiereChambre         = new Lumiere ('down', 'id', 'chambre'));
+var Lumiere                              = flow.getDefined('lumiere');
+session.assert(lumiereSalle              = new Lumiere ('down', 'id', 'salle'));
+session.assert(lumiereChambre            = new Lumiere ('down', 'id', 'chambre'));
 
-var CaptTemperature                   = flow.getDefined('captTemperature');
+var CaptTemperature                      = flow.getDefined('captTemperature');
 session.assert(captTemperatureIntSdb     = new CaptTemperature(consigne_temperature, 'sdb'));
 session.assert(captTemperatureIntSalle   = new CaptTemperature(consigne_temperature, 'salle'));
 session.assert(captTemperatureIntChambre = new CaptTemperature(consigne_temperature, 'chambre'));
-session.assert(captTemperatureExt     = new CaptTemperature(consigne_temperature, 'exterieur'));
+session.assert(captTemperatureExt        = new CaptTemperature(consigne_temperature, 'exterieur'));
 
-var CaptLuminosite                    = flow.getDefined('captLuminosite');
-session.assert(captLuminositeExt      = new CaptLuminosite(consigne_luminosite, 'exterieur'));
+var CaptLuminosite                       = flow.getDefined('captLuminosite');
+session.assert(captLuminositeExt         = new CaptLuminosite(50, 'exterieur'));
 session.assert(captLuminositeIntSalle    = new CaptLuminosite(consigne_luminosite, 'salle'));
 session.assert(captLuminositeIntChambre  = new CaptLuminosite(consigne_luminosite, 'chambre'));
 
-var Volet                             = flow.getDefined('volet');
-session.assert(voletSalle             = new Volet('up', 'id', 'salle'));
-session.assert(voletChambre           = new Volet('up', 'id', 'chambre'));
+var Volet                                = flow.getDefined('volet');
+session.assert(voletSalle                = new Volet('up', 'id', 'salle'));
+session.assert(voletChambre              = new Volet('up', 'id', 'chambre'));
 
-var Consigne                          = flow.getDefined('consigne');
-session.assert(consigneTemp           = new Consigne(consigne_temperature, consigne_temperature, consigne_temperature, 'temperature'));
-session.assert(consigneLum            = new Consigne(consigne_luminosite, consigne_luminosite, consigne_luminosite, 'luminosite'));
-session.assert(consigneCo2            = new Consigne(consigne_co2, consigne_co2, consigne_co2, 'co2'));
+var Consigne                             = flow.getDefined('consigne');
+session.assert(consigneTemp              = new Consigne(consigne_temperature, consigne_temperature, consigne_temperature, 'temperature'));
+session.assert(consigneLum               = new Consigne(consigne_luminosite, consigne_luminosite, consigne_luminosite, 'luminosite'));
+session.assert(consigneCo2               = new Consigne(consigne_co2, consigne_co2, consigne_co2, 'co2'));
 
-var VMC                               = flow.getDefined('VMC');
-session.assert(vmc                    = new VMC(1));
+var VMC                                  = flow.getDefined('VMC');
+session.assert(vmc                       = new VMC(2));
 
-var CaptCO2                           = flow.getDefined('captCO2');
-session.assert(captCO2                = new CaptCO2(400));
+var CaptCO2                              = flow.getDefined('captCO2');
+session.assert(captCO2                   = new CaptCO2(100));
 
-var Moment							  = flow.getDefined('moment');
-session.assert(moment 				  = new Moment('jour'));
+var Moment                               = flow.getDefined('moment');
+session.assert(moment                    = new Moment('jour'));
 
 
 function afficherData() {
-	/*
-	console.log("--------- Salle ---------");
-	console.log("Chauffage   => "+chauffageSalle.getValue());
-	console.log("            => "+chauffageSalle.getEtat());
-	console.log("Lumiere     => "+ lumiereSalle.getValue());
-	console.log("Température => "+ captTemperatureSalle.getValue());
-	console.log("Luminosité  => "+captLuminositeSalle.getValue());
-	console.log("Volet       => "+voletSalle.getValue());
-	console.log("Moment      => "+ moment.getValue());
-	*/
-	console.log("Consigne Température  => "+consigneTemp.getValue('sdb'));
-	console.log("Consigne Luminosité => "+consigneLum.getValue('chambre'));
+	//console.log(voletChambre.getValue());
 }
 
 
@@ -147,8 +89,4 @@ var obj = "{'consigneTemp':30,'consigneLum':40,'consigneCo2';41,'captLuminositeE
 // Démarrage du raisonneur
 session.matchUntilHalt().then(function(){});
 
-//setTimeout(afficherData, 1000);
-
-react(obj).then(function(valeur){
-	console.log(valeur)
-});
+setTimeout(afficherData, 200);
